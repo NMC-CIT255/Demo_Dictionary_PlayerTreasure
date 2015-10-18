@@ -38,10 +38,18 @@ namespace Demo_Dictionary_PlayerTreasure
             // TODO 08c - call the method to display the player's treasure         
             DisplayPlayersTreasure(myPlayer);
 
+            Console.WriteLine("Now let's add 25 gold coins.");
+            Console.WriteLine("Press the Enter key to continue.");
+            Console.ReadLine();
+
             // TODO 09b - call the method to add more coins of a specific type to the player's treasure
             AddCoinsToPlayer(myPlayer, gameTreasure, Treasure.CoinNames.SmallGoldCoin, 25);
 
             DisplayPlayersTreasure(myPlayer);
+
+            Console.WriteLine("Now let's subtract 10 gold coins.");
+            Console.WriteLine("Press the Enter key to continue.");
+            Console.ReadLine();
 
             // TODO 10b - call the method to subtract coins of a specific type from the player's treasure
             SubtractCoinsFromPlayer(myPlayer, gameTreasure, Treasure.CoinNames.SmallGoldCoin, 10);
