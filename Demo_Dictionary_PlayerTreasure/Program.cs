@@ -33,8 +33,9 @@ namespace Demo_Dictionary_PlayerTreasure
             DisplayTreasureTypes(gameTreasure);
 
             // TODO 07b - call the method to give the player some coins at the start of the game
-            GivePlayerCoins(myPlayer, gameTreasure)
-;
+            GivePlayerCoins(myPlayer, gameTreasure);
+
+
         }
 
         // TODO 04a - add a method to initialze the game treasure types
@@ -126,6 +127,51 @@ namespace Demo_Dictionary_PlayerTreasure
             myPlayer.Coins.Add(smallGoldCoins);
             myPlayer.Coins.Add(smallSilverCoins);
             myPlayer.Coins.Add(smallBronzeCoins);
+        }
+
+
+        // TODO 08b - add a DisplayPlayerTreasure method
+        /// <summary>
+        /// display all of the currency types
+        /// </summary>
+        public void DisplayPlayersTreasure(Player myPlayer)
+        {
+
+            Console.WriteLine();
+
+            Console.WriteLine("The Player has the following treasure:");
+            Console.WriteLine();
+
+            DisplayPlayersCoins(myPlayer);
+
+            Console.WriteLine("Press the Enter key to continue.");
+            Console.ReadLine();
+        }
+
+        // TODO 08c - add a DisplayPlayersCoins method
+        /// <summary>
+        /// display all of the currency types
+        /// </summary>
+        public void DisplayPlayersCoins(Player myPlayer)
+        {
+            Console.WriteLine();
+
+            Console.ForegroundColor = ConsoleColor.Red;
+            Console.WriteLine("Coins:");
+            Console.ForegroundColor = ConsoleColor.White;
+            Console.WriteLine();
+
+            foreach (CoinGroup coin in myPlayer.Coins)
+            {
+                Console.WriteLine(coin.Quantity + " " + coin.CoinType.Name);
+            }
+        }
+        public static void AddCoinsToPlayer(Player myPlayer, Treasure gameTreasure, CoinGroup coins, int quantity)
+        {
+            // find the index of coin type
+            int coinTypeIndex = myPlayer.Coins.FindIndex(c => c.CoinType.Name == coins.CoinType.Name);
+            
+            myPlayer.Coins[coinTypeIndex].Quantity = ++quantity;
         }
     }
 }
