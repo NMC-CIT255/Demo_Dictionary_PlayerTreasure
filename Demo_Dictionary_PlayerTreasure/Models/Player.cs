@@ -4,8 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Demo_ListsDictionaries
+namespace Demo_Dictionary_PlayerTreasure
 {
+    // TODO 00a create Player class derived from the Character class
     /// <summary>
     /// Player class, inherites from Character class
     /// </summary>
@@ -18,8 +19,8 @@ namespace Demo_ListsDictionaries
 
         #region FIELDS
 
-        private List<CoinGroup> _coins; // add a field/property to hold the player's coins
-        private List<Weapon> _weapons; // add a field/property to hold the player's weapons      
+        // TODO 06b - add a field/property of list of CoinGroup to the hold the player's coins
+        private List<CoinGroup> _coins;  
 
         #endregion
 
@@ -29,12 +30,6 @@ namespace Demo_ListsDictionaries
         {
             get { return _coins; }
             set { _coins = value; }
-        }
-
-        public List<Weapon> Weapons
-        {
-            get { return _weapons; }
-            set { _weapons = value; }
         }
 
         #endregion
@@ -52,7 +47,6 @@ namespace Demo_ListsDictionaries
 
             _coins = new List<CoinGroup>();
 
-            _weapons = new List<Weapon>();
         }
 
         #endregion

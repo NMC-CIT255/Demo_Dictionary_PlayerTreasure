@@ -5,7 +5,7 @@ using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
-namespace Demo_ListsDictionaries
+namespace Demo_Dictionary_PlayerTreasure
 {
     /// <summary>
     /// class to hold utility methods for the console

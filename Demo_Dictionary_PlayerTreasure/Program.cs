@@ -4,155 +4,128 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Demo_ListsDictionaries
+namespace Demo_Dictionary_PlayerTreasure
 {
     class Program
     {
         static void Main(string[] args)
         {
+            // TODO 00a - instantiate a player and game treasure objects
+            Treasure gametreasure = new Treasure();
             Player myPlayer = new Player("Bonzo");
 
-
-            DemoWeaponManagement(myPlayer);
-
-            DemoTreasureManagement(myPlayer);
+            // TODO 03b - call the method to demonstrate managing the player's treasure
+            DemoTreasureManagement(myPlayer, gametreasure);
 
         }
 
-        // TODO T-03 add a method to demonstrate weapons list management
+        // TODO 03a - add a method to demonstrate managing the player's treasure
         /// <summary>
-        /// demonstrate listing, adding, and removing a weapon from the player's weapon list
-        /// </summary>
-        /// <param name="myPlayer">Player Opject</param>
-        public static void DemoWeaponManagement(Player myPlayer)
-        {
-            // TODO T-04b call the method to initialize the player's weapons list
-            InitializePlayerWeapons(myPlayer);
-
-            // TODO T-05b call the method to display the player's weapons list
-            DisplayPlayersWeapons(myPlayer);
-
-            // TODO T-06b creat a new weapone and add it to the player's weapons list
-            // create and add a new laser weapon
-            Console.WriteLine("We will now add a new weapon.");
-            Console.WriteLine("Press the Enter key to continue.");
-            Weapon laser = new Weapon
-            {
-                Type = Weapon.WeaponType.laser,
-                Name = "Laser L04",
-                Description = "Handheld laser for malay type of fighting"
-            };
-            AddWeaponToPlayer(myPlayer, laser);
-            Console.ReadLine();
-
-            // TODO T-06c display the player's weapons list
-            DisplayPlayersWeapons(myPlayer);
-
-            // TODO T-07b choose and remove a weapon to the player's weapons list
-            // remove a weapon
-            Console.WriteLine("We will now remove a weapon.");
-            RemoveWeaponFromPlayer(myPlayer, "Bowie Knife");
-            Console.ReadLine();
-
-            // TODO T-07c display the player's weapons list
-            DisplayPlayersWeapons(myPlayer);
-
-            Console.WriteLine("Press the Enter key to continue.");
-            Console.ReadLine();
-        }
-
-        public static void DemoTreasureManagement(Player myPlayer)
-        {
-
-        }
-
-        // TODO T-04a add a method to initialize the player's weapons list
-        /// <summary>
-        /// add weapons to the players list of weapons
-        /// </summary>
-        /// <param name="myPlayer">Player Object</param>
-        public static void InitializePlayerWeapons(Player myPlayer)
-        {
-            myPlayer.Weapons.Add(
-                new Weapon
-                {
-                    Type = Weapon.WeaponType.gun,
-                    Name = "Thompson Submachine Gun",
-                    Description = "Fast firing submachine gun with a 50 shell mag"
-                });
-
-            myPlayer.Weapons.Add(
-                new Weapon
-                {
-                    Type = Weapon.WeaponType.knife,
-                    Name = "Bowie Knife",
-                    Description = "Really big knife"
-                });
-        }
-
-        // TODO T-05a add a method to display the player's weapons list
-        /// <summary>
-        /// display all of the player's weapons in the player's list of weapons
-        /// </summary>
-        /// <param name="myPlayer">Player Object</param>
-        public static void DisplayPlayersWeapons(Player myPlayer)
-        {
-            Console.Clear();
-
-            Console.WriteLine();
-
-            Console.WriteLine("The Player has the following weapons:");
-            Console.WriteLine();
-
-            foreach (Weapon weapon in myPlayer.Weapons)
-            {
-                Console.WriteLine("Weapon Name: " + weapon.Name);
-                Console.WriteLine("Weapon Type: " + weapon.Type);
-                Console.WriteLine("Weapon Description: " + weapon.Description);
-                Console.WriteLine("");
-            }
-
-            Console.ReadLine();
-        }
-
-        // TODO T-06a add a method to add a weapon to the player's weapons list
-        /// <summary>
-        /// add a weapon the the player's weapon list
+        /// deonstrate managing the player's treasure
         /// </summary>
         /// <param name="myPlayer"></param>
-        /// <param name="weapon"></param>
-        public static void AddWeaponToPlayer(Player myPlayer, Weapon weapon)
+        public static void DemoTreasureManagement(Player myPlayer, Treasure gameTreasure)
         {
-            myPlayer.Weapons.Add(weapon);
+            // TODO 04c - call the method to initialze the game treasure types
+            InitializeTreasures(gameTreasure);
+
+            // TODO 05b - call DisplayTreasureTypes method
+            DisplayTreasureTypes(gameTreasure);
+
+            // TODO 07b - call the method to give the player some coins at the start of the game
+            GivePlayerCoins(myPlayer, gameTreasure)
+;
         }
 
-        // TODO T-07a add a method to remove a weapon to the player's weapons list
+        // TODO 04a - add a method to initialze the game treasure types
         /// <summary>
-        /// remove a weapon from the player's weapon list
+        /// intitialize the type of treasures in the game
         /// </summary>
-        /// <param name="myPlayer">Player Object</param>
-        /// <param name="weaponName">weapon to remove</param>
-        public static void RemoveWeaponFromPlayer(Player myPlayer, string weaponName)
+        public static void InitializeTreasures(Treasure playerTreasure)
         {
-            // set default value to -1 to indicate that the weapon was not found in the list
-            int weaponIndex = -1;
 
-            // cycle through the weapon list until the weapon name matches and get the index of the weapon
-            foreach (var weapon in myPlayer.Weapons)
+            // TODO 04b - initialize the coin types
+            Coin goldCoin = new Coin(
+                Treasure.CoinNames.SmallGoldCoin,
+                "Gold coin with the Kings's face on one side and the Castle Wilhelm on the other side.",
+                Treasure.Material.Gold,
+                1);
+
+            Coin silverCoin = new Coin(
+                Treasure.CoinNames.SmallSilverCoin,
+                "Silver coin with the Queen's face on one side and the River Thomes on the other side.",
+                Treasure.Material.Silver,
+                1);
+
+            Coin bronzeCoin = new Coin(
+                Treasure.CoinNames.SmallBronzeCoin,
+                "Bronze coin with the Prince's face on one side and Mount Fidoria on the other side.",
+                Treasure.Material.Bronze,
+                1);
+
+            playerTreasure.CoinTypes.Add(goldCoin);
+            playerTreasure.CoinTypes.Add(silverCoin);
+            playerTreasure.CoinTypes.Add(bronzeCoin);
+        }
+
+        // TODO 05a - add a DisplayTreasureTypes method
+        /// <summary>
+        /// display all of the treasure types
+        /// </summary>
+        public static void DisplayTreasureTypes(Treasure gameTreasure)
+        {
+            Console.WriteLine();
+
+            Console.WriteLine("The game contains the treasure types:");
+            Console.WriteLine();
+
+            foreach (Coin coinType in gameTreasure.CoinTypes)
             {
-                if (weapon.Name == weaponName)
-                {
-                    weaponIndex = myPlayer.Weapons.IndexOf(weapon);
-                }
+                Console.WriteLine("Currency Name: " + ConsoleUtil.ToLabelFormat(coinType.Name.ToString()));
+                Console.WriteLine("Currency Description: " + coinType.Description);
+                Console.WriteLine("Currency Base Material: " + coinType.TypeOfMaterial);
+                Console.WriteLine("Currency Value: " + gameTreasure.CoinValue(coinType));
+                Console.WriteLine();
             }
 
-            // use lambda operator
-            // weaponIndex = myPlayer.Weapons.FindIndex(c => c.Name == weaponName);
-
-            Console.WriteLine("Remove the weapon with indesx = " + weaponIndex);
             Console.WriteLine("Press the Enter key to continue.");
+            Console.ReadLine();
+        }
 
-            myPlayer.Weapons.RemoveAt(weaponIndex);
+        // TODO 07a - add a method to give the player some coins at the start of the game
+        /// <summary>
+        /// give the player some coins to start the game
+        /// </summary>
+        /// <param name="myPlayer"></param>
+        /// <param name="gameTreasure"></param>
+        public static void GivePlayerCoins(Player myPlayer, Treasure gameTreasure)
+        {
+            int coinTypeIndex;
+
+            coinTypeIndex = myPlayer.Coins.FindIndex(c => c.CoinType.Name == Treasure.CoinNames.SmallGoldCoin);
+            CoinGroup smallGoldCoins = new CoinGroup()
+            {
+                Quantity = 2,
+                CoinType = gameTreasure.CoinTypes[coinTypeIndex]
+            };
+
+            coinTypeIndex = myPlayer.Coins.FindIndex(c => c.CoinType.Name == Treasure.CoinNames.SmallSilverCoin);
+            CoinGroup smallSilverCoins = new CoinGroup()
+            {
+                Quantity = 10,
+                CoinType = gameTreasure.CoinTypes[coinTypeIndex]
+            };
+
+            coinTypeIndex = myPlayer.Coins.FindIndex(c => c.CoinType.Name == Treasure.CoinNames.SmallBronzeCoin);
+            CoinGroup smallBronzeCoins = new CoinGroup()
+            {
+                Quantity = 20,
+                CoinType = gameTreasure.CoinTypes[coinTypeIndex]
+            };
+
+            myPlayer.Coins.Add(smallGoldCoins);
+            myPlayer.Coins.Add(smallSilverCoins);
+            myPlayer.Coins.Add(smallBronzeCoins);
         }
     }
 }

@@ -4,8 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Demo_ListsDictionaries
+namespace Demo_Dictionary_PlayerTreasure
 {
+    // TODO 00a create Character base class
     /// <summary>
     /// base class for player and guests in game
     /// </summary>

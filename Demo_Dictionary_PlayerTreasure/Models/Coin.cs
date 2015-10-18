@@ -4,8 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Demo_ListsDictionaries
+namespace Demo_Dictionary_PlayerTreasure
 {
+    // TOD 02 - add a Coin class
     /// <summary>
     /// class to create new coins
     /// </summary>
@@ -19,7 +20,7 @@ namespace Demo_ListsDictionaries
 
         #region FIELDS
 
-        private string _name;
+        private Treasure.CoinNames _name;
         private string _description;
         private Treasure.Material _typeOfMaterial;
         private int _quantitiyOfMaterial;
@@ -27,7 +28,7 @@ namespace Demo_ListsDictionaries
         #endregion
 
         #region PROPERTIES
-        public string Name
+        public Treasure.CoinNames Name
         {
             get { return _name; }
             set { _name = value; }
@@ -55,7 +56,7 @@ namespace Demo_ListsDictionaries
 
         #region CONSTRUCTORS
 
-        public Coin(string name, string description, Treasure.Material typeOfMaterial, int quantityOfMaterial)
+        public Coin(Treasure.CoinNames name, string description, Treasure.Material typeOfMaterial, int quantityOfMaterial)
         {
             _name = name;
             _description = description;
