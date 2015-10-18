@@ -35,7 +35,18 @@ namespace Demo_Dictionary_PlayerTreasure
             // TODO 07b - call the method to give the player some coins at the start of the game
             GivePlayerCoins(myPlayer, gameTreasure);
 
+            // TODO 08c - call the method to display the player's treasure         
+            DisplayPlayersTreasure(myPlayer);
 
+            // TODO 09b - call the method to add more coins of a specific type to the player's treasure
+            AddCoinsToPlayer(myPlayer, gameTreasure, Treasure.CoinNames.SmallGoldCoin, 25);
+
+            DisplayPlayersTreasure(myPlayer);
+
+            // TODO 10b - call the method to subtract coins of a specific type from the player's treasure
+            SubtractCoinsFromPlayer(myPlayer, gameTreasure, Treasure.CoinNames.SmallGoldCoin, 10);
+
+            DisplayPlayersTreasure(myPlayer);
         }
 
         // TODO 04a - add a method to initialze the game treasure types
@@ -103,21 +114,21 @@ namespace Demo_Dictionary_PlayerTreasure
         {
             int coinTypeIndex;
 
-            coinTypeIndex = myPlayer.Coins.FindIndex(c => c.CoinType.Name == Treasure.CoinNames.SmallGoldCoin);
+            coinTypeIndex = gameTreasure.CoinTypes.FindIndex(c => c.Name == Treasure.CoinNames.SmallGoldCoin);
             CoinGroup smallGoldCoins = new CoinGroup()
             {
-                Quantity = 2,
+                Quantity = 5,
                 CoinType = gameTreasure.CoinTypes[coinTypeIndex]
             };
 
-            coinTypeIndex = myPlayer.Coins.FindIndex(c => c.CoinType.Name == Treasure.CoinNames.SmallSilverCoin);
+            coinTypeIndex = gameTreasure.CoinTypes.FindIndex(c => c.Name == Treasure.CoinNames.SmallSilverCoin);
             CoinGroup smallSilverCoins = new CoinGroup()
             {
                 Quantity = 10,
                 CoinType = gameTreasure.CoinTypes[coinTypeIndex]
             };
 
-            coinTypeIndex = myPlayer.Coins.FindIndex(c => c.CoinType.Name == Treasure.CoinNames.SmallBronzeCoin);
+            coinTypeIndex = gameTreasure.CoinTypes.FindIndex(c => c.Name == Treasure.CoinNames.SmallBronzeCoin);
             CoinGroup smallBronzeCoins = new CoinGroup()
             {
                 Quantity = 20,
@@ -134,9 +145,9 @@ namespace Demo_Dictionary_PlayerTreasure
         /// <summary>
         /// display all of the currency types
         /// </summary>
-        public void DisplayPlayersTreasure(Player myPlayer)
+        public static void DisplayPlayersTreasure(Player myPlayer)
         {
-
+            Console.Clear();
             Console.WriteLine();
 
             Console.WriteLine("The Player has the following treasure:");
@@ -144,6 +155,7 @@ namespace Demo_Dictionary_PlayerTreasure
 
             DisplayPlayersCoins(myPlayer);
 
+            Console.WriteLine();
             Console.WriteLine("Press the Enter key to continue.");
             Console.ReadLine();
         }
@@ -152,26 +164,49 @@ namespace Demo_Dictionary_PlayerTreasure
         /// <summary>
         /// display all of the currency types
         /// </summary>
-        public void DisplayPlayersCoins(Player myPlayer)
+        public static void DisplayPlayersCoins(Player myPlayer)
         {
             Console.WriteLine();
 
-            Console.ForegroundColor = ConsoleColor.Red;
             Console.WriteLine("Coins:");
-            Console.ForegroundColor = ConsoleColor.White;
             Console.WriteLine();
 
             foreach (CoinGroup coin in myPlayer.Coins)
             {
-                Console.WriteLine(coin.Quantity + " " + coin.CoinType.Name);
+                Console.WriteLine(coin.Quantity + " " + ConsoleUtil.ToLabelFormat(coin.CoinType.Name.ToString()));
             }
         }
-        public static void AddCoinsToPlayer(Player myPlayer, Treasure gameTreasure, CoinGroup coins, int quantity)
+
+        // TODO 09a - add a method to add more coins of a specific type to the player's treasure
+        /// <summary>
+        /// a method to add more coins of a specific type to the player's treasure
+        /// </summary>
+        /// <param name="myPlayer">Player object</param>
+        /// <param name="gameTreasure">player's Treasure object</param>
+        /// <param name="coins">coin type to add</param>
+        /// <param name="quantity">number of coins</param>
+        public static void AddCoinsToPlayer(Player myPlayer, Treasure gameTreasure, Treasure.CoinNames coinName, int quantity)
         {
             // find the index of coin type
-            int coinTypeIndex = myPlayer.Coins.FindIndex(c => c.CoinType.Name == coins.CoinType.Name);
-            
-            myPlayer.Coins[coinTypeIndex].Quantity = ++quantity;
+            int coinTypeIndex = gameTreasure.CoinTypes.FindIndex(c => c.Name == coinName);
+
+            myPlayer.Coins[coinTypeIndex].Quantity += quantity;
+        }
+
+        // TODO 10a - add a method to subtract coins of a specific type from the player's treasure
+        /// <summary>
+        /// a method to subtract coins of a specific type from the player's treasure
+        /// </summary>
+        /// <param name="myPlayer">Player object</param>
+        /// <param name="gameTreasure">player's Treasure object</param>
+        /// <param name="coins">coin type to add</param>
+        /// <param name="quantity">number of coins</param>
+        public static void SubtractCoinsFromPlayer(Player myPlayer, Treasure gameTreasure, Treasure.CoinNames coinName, int quantity)
+        {
+            // find the index of coin type
+            int coinTypeIndex = gameTreasure.CoinTypes.FindIndex(c => c.Name == coinName);
+
+            myPlayer.Coins[coinTypeIndex].Quantity -= quantity;
         }
     }
 }
